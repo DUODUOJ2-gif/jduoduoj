@@ -1,0 +1,529 @@
+<!DOCTYPE html><html lang="zh-CN"><head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>DUODUOJ2 - 真正的新鲜狗粮</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com"/>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&amp;family=DM+Sans:ital,wght@0,400;0,500;0,700;1,400&amp;display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        brand: {
+                            cream: '#FAF7F2',
+                            warm: '#F5EDE3',
+                            sand: '#E8DED0',
+                            tan: '#C4A882',
+                            brown: '#8B6F4E',
+                            dark: '#3D2E1F',
+                            olive: '#6B7B5C',
+                            oliveLight: '#8FA07E',
+                            orange: '#D4875A',
+                            orangeLight: '#E8A87C',
+                            sage: '#A8B89A',
+                            moss: '#7A8F6A'
+                        }
+                    },
+                    fontFamily: {
+                        display: ['Outfit', 'sans-serif'],
+                        body: ['DM Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        * { font-family: 'DM Sans', sans-serif; }
+        h1, h2, h3, h4, h5, h6, .font-display { font-family: 'Outfit', sans-serif; }
+        .smooth-scroll { scroll-behavior: smooth; }
+        .grain-overlay {
+            position: relative;
+        }
+        .grain-overlay::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            opacity: 0.03;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+            pointer-events: none;
+        }
+        .text-balance { text-wrap: balance; }
+        @keyframes gentle-float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+        .animate-float { animation: gentle-float 6s ease-in-out infinite; }
+        .animate-float-delayed { animation: gentle-float 6s ease-in-out 2s infinite; }
+        
+        @keyframes fade-up {
+            from { opacity: 0; transform: translateY(24px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-up { animation: fade-up 0.8s ease-out forwards; }
+        
+        .hover-lift {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .hover-lift:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px rgba(61, 46, 31, 0.1);
+        }
+    </style>
+</head>
+<body class="bg-brand-cream text-brand-dark antialiased smooth-scroll">
+
+    <!-- Top Navigation -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-brand-cream/95 backdrop-blur-md border-b border-brand-sand/50">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-2 group">
+                    <svg class="w-9 h-9 text-brand-olive group-hover:text-brand-moss transition-colors" viewBox="0 0 40 40" fill="none">
+                        <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2.5"></circle>
+                        <path d="M12 20c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+                        <circle cx="20" cy="20" r="3" fill="currentColor"></circle>
+                    </svg>
+                    <span class="font-display font-bold text-xl tracking-tight text-brand-dark">DUODUOJ2</span>
+                </a>
+
+                <!-- Desktop Nav -->
+                <div class="hidden lg:flex items-center gap-1">
+                    <a href="#food" class="px-4 py-2 text-sm font-medium text-brand-brown hover:text-brand-dark rounded-full hover:bg-brand-warm transition-all">Our Food</a>
+                    <a href="#how-it-works" class="px-4 py-2 text-sm font-medium text-brand-brown hover:text-brand-dark rounded-full hover:bg-brand-warm transition-all">How It Works</a>
+                    <a href="#reviews" class="px-4 py-2 text-sm font-medium text-brand-brown hover:text-brand-dark rounded-full hover:bg-brand-warm transition-all">Reviews</a>
+                    <a href="#faq" class="px-4 py-2 text-sm font-medium text-brand-brown hover:text-brand-dark rounded-full hover:bg-brand-warm transition-all">FAQs</a>
+                    <a href="#blog" class="px-4 py-2 text-sm font-medium text-brand-brown hover:text-brand-dark rounded-full hover:bg-brand-warm transition-all">Blog</a>
+                </div>
+
+                <!-- Auth Buttons -->
+                <div class="flex items-center gap-3">
+                    <a href="#" class="hidden sm:block px-5 py-2.5 text-sm font-semibold text-brand-dark hover:text-brand-olive transition-colors">Log in</a>
+                    <a href="#" class="px-6 py-2.5 bg-brand-olive text-white text-sm font-semibold rounded-full hover:bg-brand-moss transition-colors shadow-sm">Get Started</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden grain-overlay">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+                <!-- Left Content -->
+                <div class="max-w-xl animate-fade-up">
+                    <div class="inline-flex items-center gap-2 px-4 py-2 bg-brand-olive/10 rounded-full mb-6">
+                        <span class="w-2 h-2 bg-brand-olive rounded-full animate-pulse"></span>
+                        <span class="text-xs font-semibold text-brand-olive uppercase tracking-wider">Interactive &amp; Safe Pet Toys</span>
+                    </div>
+                    <h1 class="font-display text-5xl lg:text-6xl xl:text-7xl font-bold text-brand-dark leading-[1.1] mb-6 text-balance">
+                        Grow, Play, Love<br/>
+                        <span class="text-brand-olive">– Every Single Day</span>
+                    </h1>
+                    <p class="text-lg text-brand-brown leading-relaxed mb-8 max-w-md">
+                        From wobbly first steps to the gentle nudges of their golden years, this toy grows with your pet—turning every day's play into a page of the story you write together.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <a href="#" class="inline-flex items-center justify-center px-8 py-4 bg-brand-orange text-white font-semibold rounded-full hover:bg-brand-orangeLight transition-colors shadow-lg shadow-brand-orange/20 text-base">
+                            Get Started
+                            <svg class="w-5 h-5 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                        </a>
+                        <a href="#" class="inline-flex items-center justify-center px-8 py-4 border-2 border-brand-sand text-brand-dark font-semibold rounded-full hover:border-brand-tan hover:bg-brand-warm transition-all text-base">
+                            See Our Plans
+                        </a>
+                    </div>
+                    <div class="mt-10 flex items-center gap-6">
+                        <div class="flex -space-x-3">
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-cream object-cover" src="https://mastergo.com/ai/api/search-image?query=happy golden retriever dog portrait close up friendly expression warm lighting&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435ABCDEfghij12345KLMN&amp;type=gen-ui-agent" alt="Dog"/>
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-cream object-cover" src="https://mastergo.com/ai/api/search-image?query=adorable french bulldog portrait smiling cute face professional pet photography&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435FGHIJklmno67890OPQR&amp;type=gen-ui-agent" alt="Dog"/>
+                            <img class="w-10 h-10 rounded-full border-2 border-brand-cream object-cover" src="https://mastergo.com/ai/api/search-image?query=cute beagle dog portrait happy expression warm natural lighting pet photo&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435STUVWxyzab34567CDEF&amp;type=gen-ui-agent" alt="Dog"/>
+                        </div>
+                        <div>
+                            <div class="flex items-center gap-1">
+                                <svg class="w-4 h-4 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                                <svg class="w-4 h-4 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                                <svg class="w-4 h-4 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                                <svg class="w-4 h-4 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                                <svg class="w-4 h-4 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                            </div>
+                            <p class="text-xs text-brand-brown mt-1">Trusted by 100,000+ dog parents</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Image -->
+                <div class="relative">
+                    <div class="absolute -top-8 -right-8 w-72 h-72 bg-brand-olive/10 rounded-full blur-3xl"></div>
+                    <div class="absolute -bottom-8 -left-8 w-64 h-64 bg-brand-orange/10 rounded-full blur-3xl"></div>
+                    <div class="relative rounded-[32px] overflow-hidden shadow-2xl shadow-brand-dark/10">
+                        <img class="w-full h-[520px] object-cover object-center" src="https://mastergo.com/ai/api/search-image?query=happy dog playing with owner in park joyful interaction warm sunlight outdoor fun bonding moment&amp;width=700&amp;height=600&amp;orientation=portrait&amp;flag=1781589174435GHIJKlmnop12345STUV&amp;type=gen-ui-agent" alt="Happy dog enjoying fresh food"/>
+                        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-brand-dark/60 to-transparent">
+                            <p class="text-white font-medium text-sm">"Since getting DUODUOJ2 toys, my dog is happier and more active than ever!"</p>
+                            <p class="text-white/70 text-xs mt-1">— Sarah M., Luna's mom</p>
+                        </div>
+                    </div>
+                    <!-- Floating Badge -->
+                    <div class="absolute -bottom-4 -left-4 bg-white rounded-2xl p-4 shadow-xl animate-float">
+                        <div class="flex items-center gap-3">
+                            <div class="w-12 h-12 bg-brand-olive/10 rounded-xl flex items-center justify-center">
+                                <svg class="w-6 h-6 text-brand-olive" fill="currentColor" viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"></path></svg>
+                            </div>
+                            <div>
+                                <p class="font-display font-bold text-brand-dark text-sm">Dog Approved</p>
+                                <p class="text-xs text-brand-brown">Loved by thousands of pups</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trust Badges -->
+    <section class="py-16 bg-white border-y border-brand-sand/30">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-brand-olive/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-brand-olive/20 transition-colors">
+                        <svg class="w-8 h-8 text-brand-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-dark mb-1">Vet Formulated</h3>
+                    <p class="text-sm text-brand-brown">Board-certified veterinary nutritionists</p>
+                </div>
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-brand-orange/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-brand-orange/20 transition-colors">
+                        <svg class="w-8 h-8 text-brand-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z"></path></svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-dark mb-1">Human-Grade</h3>
+                    <p class="text-sm text-brand-brown">USDA-inspected ingredients</p>
+                </div>
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-brand-tan/20 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-brand-tan/30 transition-colors">
+                        <svg class="w-8 h-8 text-brand-brown" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-dark mb-1">Delivered Fresh</h3>
+                    <p class="text-sm text-brand-brown">Pre-portioned to your door</p>
+                </div>
+                <div class="flex flex-col items-center text-center group">
+                    <div class="w-16 h-16 bg-brand-olive/10 rounded-2xl flex items-center justify-center mb-4 group-hover:bg-brand-olive/20 transition-colors">
+                        <svg class="w-8 h-8 text-brand-olive" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path></svg>
+                    </div>
+                    <h3 class="font-display font-semibold text-brand-dark mb-1">Personalized</h3>
+                    <p class="text-sm text-brand-brown">Tailored to your dog's needs</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="py-24 bg-brand-cream grain-overlay">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-semibold text-brand-olive uppercase tracking-widest mb-3 block">Simple &amp; Easy</span>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-brand-dark mb-4 text-balance">How It Works</h2>
+                <p class="text-brand-brown text-lg">Getting started with fresh food is easier than you think. Three simple steps to a healthier, happier dog.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 lg:gap-12">
+                <!-- Step 1 -->
+                <div class="relative group">
+                    <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift h-full">
+                        <div class="w-14 h-14 bg-brand-olive text-white rounded-2xl flex items-center justify-center text-xl font-display font-bold mb-6">1</div>
+                        <h3 class="font-display text-xl font-bold text-brand-dark mb-3">Create Your Dog's Profile</h3>
+                        <p class="text-brand-brown leading-relaxed mb-6">Tell us about your dog — breed, age, weight, activity level, and any health goals. Our algorithm creates a personalized nutrition plan.</p>
+                        <div class="rounded-2xl overflow-hidden">
+                            <img class="w-full h-48 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=person using smartphone app to create dog profile modern clean interface warm lighting&amp;width=400&amp;height=300&amp;orientation=landscape&amp;flag=1781589174435WXYZAbcdef12345GHIJ&amp;type=gen-ui-agent" alt="Create profile"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="relative group">
+                    <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift h-full">
+                        <div class="w-14 h-14 bg-brand-orange text-white rounded-2xl flex items-center justify-center text-xl font-display font-bold mb-6">2</div>
+                        <h3 class="font-display text-xl font-bold text-brand-dark mb-3">Receive Your Box</h3>
+                        <p class="text-brand-brown leading-relaxed mb-6">Fresh meals arrive at your door in eco-friendly packaging, perfectly portioned for your dog. Just open, pour, and serve.</p>
+                        <div class="rounded-2xl overflow-hidden">
+                            <img class="w-full h-48 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=cardboard box with fresh dog food packs on doorstep morning light eco friendly packaging&amp;width=400&amp;height=300&amp;orientation=landscape&amp;flag=1781589174435KLMNOpqrst12345UVWX&amp;type=gen-ui-agent" alt="Delivery box"/>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="relative group">
+                    <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift h-full">
+                        <div class="w-14 h-14 bg-brand-tan text-white rounded-2xl flex items-center justify-center text-xl font-display font-bold mb-6">3</div>
+                        <h3 class="font-display text-xl font-bold text-brand-dark mb-3">Watch Them Thrive</h3>
+                        <p class="text-brand-brown leading-relaxed mb-6">See the difference real food makes — shinier coat, more energy, better digestion, and a visibly happier pup.</p>
+                        <div class="rounded-2xl overflow-hidden">
+                            <img class="w-full h-48 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=happy healthy dog with shiny coat playing in garden vibrant green grass golden hour lighting&amp;width=400&amp;height=300&amp;orientation=landscape&amp;flag=1781589174435YZABCdefgh12345IJKL&amp;type=gen-ui-agent" alt="Happy dog"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Fresh Ingredients -->
+    <section id="food" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid lg:grid-cols-2 gap-16 items-center">
+                <div>
+                    <span class="text-xs font-semibold text-brand-orange uppercase tracking-widest mb-3 block">Why DUODUOJ2</span>
+                    <h2 class="font-display text-4xl lg:text-5xl font-bold text-brand-dark mb-6 text-balance">Not All Toys Are Created Equal</h2>
+                    <p class="text-brand-brown text-lg leading-relaxed mb-8">大多数玩具只关注耐咬，却忽略了狗狗真正需要的——与主人的互动、心理刺激和运动乐趣。DUODUOJ2 从狗狗行为学和心理学出发，设计每一款玩具。</p>
+                    
+                    <div class="space-y-4 mb-10">
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 bg-brand-olive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5 text-brand-olive" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-semibold text-brand-dark">互动设计</h4>
+                                <p class="text-sm text-brand-brown">促进人宠情感连接，增强信任感</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 bg-brand-olive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5 text-brand-olive" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-semibold text-brand-dark">心理健康</h4>
+                                <p class="text-sm text-brand-brown">缓解分离焦虑，减少破坏行为</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 bg-brand-olive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5 text-brand-olive" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-semibold text-brand-dark">运动益处</h4>
+                                <p class="text-sm text-brand-brown">激发运动本能，保持活力健康</p>
+                            </div>
+                        </div>
+                        <div class="flex items-start gap-4">
+                            <div class="w-6 h-6 bg-brand-olive/10 rounded-full flex items-center justify-center flex-shrink-0 mt-0.5">
+                                <svg class="w-3.5 h-3.5 text-brand-olive" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                            </div>
+                            <div>
+                                <h4 class="font-display font-semibold text-brand-dark">安全耐用</h4>
+                                <p class="text-sm text-brand-brown">食品级材质，耐咬不伤牙</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <a href="#" class="inline-flex items-center text-brand-olive font-semibold hover:text-brand-moss transition-colors group">
+                        Explore Our Toy Collection
+                        <svg class="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                    </a>
+                </div>
+
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="space-y-4">
+                        <div class="rounded-[24px] overflow-hidden shadow-lg">
+                            <img class="w-full h-56 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=colorful rubber chew toy for dogs safe food grade material textured surface pet product photography warm lighting&amp;width=300&amp;height=350&amp;orientation=portrait&amp;flag=1781589174435ABCDEfghij12345KLMN&amp;type=gen-ui-agent" alt="Colorful rubber chew toy"/>
+                        </div>
+                        <div class="rounded-[24px] overflow-hidden shadow-lg">
+                            <img class="w-full h-72 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=dog frisbee toy bright orange color mid air action shot outdoor grass field dynamic pet photography&amp;width=300&amp;height=400&amp;orientation=portrait&amp;flag=1781589174435FGHIJklmno67890OPQR&amp;type=gen-ui-agent" alt="Dog frisbee toy"/>
+                        </div>
+                    </div>
+                    <div class="space-y-4 pt-8">
+                        <div class="rounded-[24px] overflow-hidden shadow-lg">
+                            <img class="w-full h-72 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=interactive puzzle treat dispensing toy for dogs colorful plastic design mental stimulation pet product photography&amp;width=300&amp;height=400&amp;orientation=portrait&amp;flag=1781589174435STUVWxyzab34567CDEF&amp;type=gen-ui-agent" alt="Interactive puzzle toy"/>
+                        </div>
+                        <div class="rounded-[24px] overflow-hidden shadow-lg">
+                            <img class="w-full h-56 object-cover object-top" src="https://mastergo.com/ai/api/search-image?query=person playing tug of war with happy dog rope toy indoor cozy living room bonding moment warm lighting&amp;width=300&amp;height=350&amp;orientation=portrait&amp;flag=1781589174435GHIJKlmnop12345STUV&amp;type=gen-ui-agent" alt="Tug of war with dog"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews / Social Proof -->
+    <section id="reviews" class="py-24 bg-brand-warm grain-overlay">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-xs font-semibold text-brand-olive uppercase tracking-widest mb-3 block">Real Stories</span>
+                <h2 class="font-display text-4xl lg:text-5xl font-bold text-brand-dark mb-4 text-balance">Loved by dogs and their humans</h2>
+                <p class="text-brand-brown text-lg">Join thousands of pet parents who've made the switch to fresh.</p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Review 1 -->
+                <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                    </div>
+                    <p class="text-brand-dark leading-relaxed mb-6">"My picky eater finally finishes her bowl! Within weeks, her coat became so soft and shiny. Even our vet noticed the difference."</p>
+                    <div class="flex items-center gap-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://mastergo.com/ai/api/search-image?query=happy corgi dog portrait cute short legs smiling friendly expression&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435RSTUVwxyz12345ABCD&amp;type=gen-ui-agent" alt="Corgi"/>
+                        <div>
+                            <p class="font-display font-semibold text-brand-dark text-sm">Emily R.</p>
+                            <p class="text-xs text-brand-brown">Bella's mom · Member since 2023</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 2 -->
+                <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                    </div>
+                    <p class="text-brand-dark leading-relaxed mb-6">"After years of digestive issues, Max is finally thriving. The personalized portions make feeding so easy, and he gets excited for every meal."</p>
+                    <div class="flex items-center gap-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://mastergo.com/ai/api/search-image?query=labrador retriever dog portrait happy friendly chocolate lab&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435EFGHIjklmn12345OPQR&amp;type=gen-ui-agent" alt="Labrador"/>
+                        <div>
+                            <p class="font-display font-semibold text-brand-dark text-sm">David K.</p>
+                            <p class="text-xs text-brand-brown">Max's dad · Member since 2022</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Review 3 -->
+                <div class="bg-white rounded-[24px] p-8 shadow-sm hover-lift">
+                    <div class="flex items-center gap-1 mb-4">
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                        <svg class="w-5 h-5 text-brand-orange fill-current" viewBox="0 0 20 20"><path d="M10 15l-5.878 3.09 1.123-6.545L.489 6.91l6.572-.955L10 0l2.939 5.955 6.572.955-4.756 4.635 1.123 6.545z"></path></svg>
+                    </div>
+                    <p class="text-brand-dark leading-relaxed mb-6">"The convenience is unmatched — fresh food delivered to my door, perfectly portioned. Luna has more energy than ever, and her allergies have improved dramatically."</p>
+                    <div class="flex items-center gap-4">
+                        <img class="w-12 h-12 rounded-full object-cover" src="https://mastergo.com/ai/api/search-image?query=australian shepherd dog portrait beautiful blue merle coat intelligent expression&amp;width=80&amp;height=80&amp;orientation=square&amp;flag=1781589174435STUVWxyzab12345CDEF&amp;type=gen-ui-agent" alt="Aussie"/>
+                        <div>
+                            <p class="font-display font-semibold text-brand-dark text-sm">Jessica M.</p>
+                            <p class="text-xs text-brand-brown">Luna's mom · Member since 2024</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats -->
+            <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
+                <div>
+                    <p class="font-display text-4xl font-bold text-brand-olive">100k+</p>
+                    <p class="text-sm text-brand-brown mt-1">Happy dogs</p>
+                </div>
+                <div>
+                    <p class="font-display text-4xl font-bold text-brand-olive">4.9/5</p>
+                    <p class="text-sm text-brand-brown mt-1">Average rating</p>
+                </div>
+                <div>
+                    <p class="font-display text-4xl font-bold text-brand-olive">50M+</p>
+                    <p class="text-sm text-brand-brown mt-1">Meals served</p>
+                </div>
+                <div>
+                    <p class="font-display text-4xl font-bold text-brand-olive">93%</p>
+                    <p class="text-sm text-brand-brown mt-1">See health improvements</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-24 bg-brand-olive relative overflow-hidden grain-overlay">
+        <div class="absolute inset-0 opacity-10">
+            <div class="absolute top-0 left-1/4 w-96 h-96 bg-white rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 right-1/4 w-96 h-96 bg-brand-orange rounded-full blur-3xl"></div>
+        </div>
+        <div class="max-w-4xl mx-auto px-6 lg:px-8 text-center relative">
+            <h2 class="font-display text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-6 text-balance">Give your dog the gift of real food</h2>
+            <p class="text-white/80 text-lg lg:text-xl max-w-2xl mx-auto mb-10 leading-relaxed">Start your plan today and see why thousands of pet parents trust DUODUOJ2 for their best friend's nutrition.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <a href="#" class="inline-flex items-center justify-center px-10 py-4 bg-white text-brand-olive font-bold rounded-full hover:bg-brand-cream transition-colors shadow-lg text-base">
+                    Get Started Today
+                </a>
+                <a href="#" class="inline-flex items-center justify-center px-10 py-4 border-2 border-white/30 text-white font-semibold rounded-full hover:border-white/60 transition-colors text-base">
+                    Calculate Your Price
+                </a>
+            </div>
+            <p class="text-white/50 text-sm mt-6">30-day money-back guarantee · Cancel anytime</p>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 lg:gap-12 mb-12">
+                <!-- Brand -->
+                <div class="col-span-2 md:col-span-1">
+                    <a href="#" class="flex items-center gap-2 mb-4">
+                        <svg class="w-8 h-8 text-brand-oliveLight" viewBox="0 0 40 40" fill="none">
+                            <circle cx="20" cy="20" r="18" stroke="currentColor" stroke-width="2.5"></circle>
+                            <path d="M12 20c0-4.4 3.6-8 8-8s8 3.6 8 8-3.6 8-8 8" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"></path>
+                            <circle cx="20" cy="20" r="3" fill="currentColor"></circle>
+                        </svg>
+                        <span class="font-display font-bold text-lg">DUODUOJ2</span>
+                    </a>
+                    <p class="text-brand-sand text-sm leading-relaxed">Real food for real dogs. Fresh, healthy meals delivered to your door.</p>
+                </div>
+
+                <!-- Products -->
+                <div>
+                    <h4 class="font-display font-semibold text-sm uppercase tracking-wider mb-4 text-brand-sand">Products</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Our Food</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Treats</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Supplements</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Gift Cards</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company -->
+                <div>
+                    <h4 class="font-display font-semibold text-sm uppercase tracking-wider mb-4 text-brand-sand">Company</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">About Us</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Careers</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Press</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Blog</a></li>
+                    </ul>
+                </div>
+
+                <!-- Support -->
+                <div>
+                    <h4 class="font-display font-semibold text-sm uppercase tracking-wider mb-4 text-brand-sand">Support</h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Help Center</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Contact Us</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">FAQs</a></li>
+                        <li><a href="#" class="text-sm text-white/70 hover:text-white transition-colors">Shipping</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Bottom -->
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                <p class="text-sm text-white/50">© 2024 DUODUOJ2. All rights reserved.</p>
+                <div class="flex items-center gap-6">
+                    <a href="#" class="text-sm text-white/50 hover:text-white transition-colors">Privacy</a>
+                    <a href="#" class="text-sm text-white/50 hover:text-white transition-colors">Terms</a>
+                    <a href="#" class="text-sm text-white/50 hover:text-white transition-colors">Cookies</a>
+                </div>
+                <div class="flex items-center gap-4">
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path></svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"></path></svg>
+                    </a>
+                    <a href="#" class="w-10 h-10 bg-white/10 rounded-full flex items-center justify-center hover:bg-white/20 transition-colors">
+                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path></svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+</body></html>
